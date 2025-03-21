@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Authenticate and Fetch Secrets from Infisical
-        uses: infisical/github-action@v1
+        uses: Infisical/secrets-action@v1.0.9
         with:
           auth-method: "oidc"
           infisical-url: "https://app.infisical.com" # Adjust if using self-hosted
