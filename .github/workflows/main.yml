@@ -21,6 +21,6 @@ jobs:
         with:
           method: oidc  # Use OIDC authentication
           identity-id: ${{ secrets.MACHINE_IDENTITY_CLIENT_ID }}  # Set the identity ID
-          oidc-audience: "infisical"
+          oidc-audience: "https://github.com/0xArshdeep"
           project-slug: "integrations-6-vsv"  # Replace with your Infisical project slug
           env-slug: "dev"  # Replace with the Infisical environment slug
