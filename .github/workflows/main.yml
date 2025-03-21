@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  id-token: write  # Required for OIDC authentication
+  id-token: write  # Required for GitHub to generate an OIDC token
   contents: read
 
 jobs:
@@ -16,12 +16,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Authenticate and Fetch Secrets from Infisical
+      - name: Fetch Secrets from Infisical
         uses: Infisical/secrets-action@v1.0.9
         with:
-          auth-method: "oidc"
-          infisical-url: "https://app.infisical.com" # Adjust if using self-hosted
-          secrets: |
-            ENV_VAR_1
-            ENV_VAR_2
-          mount-path: "./secrets.env" # Optional: Store secrets in a file
+          method: oidc  # Use OIDC authentication
+          identity-id: ${{ secrets.MACHINE_IDENTITY_CLIENT_ID }}  # Set the identity ID
+          oidc-audience: "infisical"
+          project-slug: "integrations-6-vsv"  # Replace with your Infisical project slug
+          env-slug: "dev"  # Replace with the Infisical environment slug
