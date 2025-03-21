@@ -1,0 +1,27 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write  # Required for OIDC authentication
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate and Fetch Secrets from Infisical
+        uses: infisical/github-action@v1
+        with:
+          auth-method: "oidc"
+          infisical-url: "https://app.infisical.com" # Adjust if using self-hosted
+          secrets: |
+            ENV_VAR_1
+            ENV_VAR_2
+          mount-path: "./secrets.env" # Optional: Store secrets in a file
